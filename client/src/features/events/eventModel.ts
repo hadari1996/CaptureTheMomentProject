@@ -8,7 +8,7 @@ export interface Event {
   date: Date;
   _id: String;
   status: Status;
-  userid: String;
+  email: String;
   packageType: String;
   price: Number;
 }

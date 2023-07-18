@@ -160,7 +160,7 @@ const EventCard: FC<EventCardProps> = ({
 
             <h5>{JSON.stringify(eventDate.date).substr(1, 10)}</h5>
             <h5>{status}</h5>
-            {status === "open" ? null : <h5>{eventDate.userid}</h5>}
+            {status === "open" ? null : <h5>{eventDate.email}</h5>}
             {status === "pending" ? (
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Button

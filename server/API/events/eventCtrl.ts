@@ -101,7 +101,7 @@ export async function getAllClosedDatesEvent(req, res) {
 export async function updateEventStatus(req, res) {
   try {
     let eventDB1 = await EventModel.findById(req.params.eventId);
-    let userName = await UserModel.findOne({ email: eventDB1.userid });
+    let userName = await UserModel.findOne({ email: eventDB1.email });
     const update = { status: Status.APPROVED };
     let eventDB = await EventModel.findByIdAndUpdate(
       req.params.eventId,
@@ -115,7 +115,7 @@ export async function updateEventStatus(req, res) {
     eventDB.save;
     if (!eventDB) throw new Error("not found this date");
 
-    const email = eventDB1.userid;
+    const email = eventDB1.email;
     if (!email) throw new Error("no email");
 
     const subject = "This event has been Approved by Rachel Hacham";
@@ -141,18 +141,18 @@ export async function deleteEvent(req, res) {
 export async function reopenEventStatus(req, res) {
   try {
     let eventDB = await EventModel.findById(req.params.eventId);
-    let userName = await UserModel.findOne({ email: eventDB.userid });
+    let userName = await UserModel.findOne({ email: eventDB.email });
     let eventDB1 = await EventModel.findByIdAndUpdate(
       req.params.eventId,
 
-      { status: Status.OPEN, userid: "", packageType: "", price: null },
+      { status: Status.OPEN, email: "", packageType: "", price: null },
       {
         new: true,
       }
     );
     if (!eventDB) throw new Error("not found this date");
 
-    const email = eventDB.userid;
+    const email = eventDB.email;
     if (!email) throw new Error("no email");
 
     const subject = "This event has been cancceld";
@@ -162,7 +162,7 @@ export async function reopenEventStatus(req, res) {
     const status = sendMail(email, res, subject, content);
     if (!status) throw new Error("not send mail");
 
-    res.send({ status1: true, eventDB: eventDB1, email: eventDB.userid });
+    res.send({ status1: true, eventDB: eventDB1, email: eventDB.email });
   } catch (error) {
     res.status(500).send({ error: error.message, status: false });
   }
@@ -172,7 +172,7 @@ export async function updateEventPackage(req, res) {
   try {
     const { packageInformation } = req.body;
     const { user } = req.body;
-    let eventExsits = await EventModel.find({ userid: user.email });
+    let eventExsits = await EventModel.find({ email: user.email });
     eventExsits = eventExsits.filter((obj) => {
       return isDatePass(obj.date) == true;
     });
@@ -185,7 +185,7 @@ export async function updateEventPackage(req, res) {
           status: Status.PENDING,
           packageType: packageInformation.packageName,
           price: packageInformation.packagePrice,
-          userid: user.email,
+          email: user.email,
         },
         {
           new: true,
@@ -205,7 +205,7 @@ export async function getMyPackage(req, res) {
   try {
     const { email } = req.params;
     let UserPackage = await EventModel.find({
-      userid: email,
+      email: email,
     });
     if (UserPackage.length > 0) {
       UserPackage = UserPackage.filter((obj) => {

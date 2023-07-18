@@ -9,7 +9,7 @@ export enum Status {
 const EventSchema = new mongoose.Schema({
   date: Date,
   status: { type: String, enum: [Status.OPEN, Status.PENDING, Status.APPROVED] },
-  userid: String,
+  email: String,
   packageType: String,
   price: Number,
 });

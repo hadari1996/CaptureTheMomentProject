@@ -4,7 +4,7 @@ import { IoIosClock } from "react-icons/io";
 import { Event, Status } from "../features/events/eventModel";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { userSelector } from "../features/user/userSlice";
 import eventPackages, { packageType } from "../features/packages/package";
@@ -60,6 +60,10 @@ const EventCard: FC<EventCardProps> = ({
     setPackageInformation(result[0]);
   }, [packageSelect]);
 
+  useEffect(() => {
+    dispatch(getUserByCookie());
+  }, []);
+
   const filterEventList = (
     status: boolean,
     openEvents: Event[],
@@ -101,13 +105,11 @@ const EventCard: FC<EventCardProps> = ({
 
   async function handleApprove(event: React.MouseEvent<HTMLElement>) {
     try {
+      setStatus(Status.APPROVED);
       const { data } = await axios.patch(
         `/api/v1/events/${eventDate._id}/status`
       );
-
       const { status } = data;
-      setStatus(Status.APPROVED);
-
       if (openEvents && setOpenEvents) {
         filterEventList(status, openEvents, eventDate, setOpenEvents);
       }

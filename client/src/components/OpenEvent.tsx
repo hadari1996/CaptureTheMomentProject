@@ -20,7 +20,6 @@ export const OpenEvent = () => {
     const { openDatesEvent, status } = data;
     setOpenEvents(openDatesEvent);
   };
-
   
   useEffect(() => {
     getAllOpenDates();

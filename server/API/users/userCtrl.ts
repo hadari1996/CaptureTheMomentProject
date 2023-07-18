@@ -6,7 +6,7 @@ const saltRounds = 10;
 
 export async function register(req, res) {
   try {
-    
+    console.log("test")
     const { password, confirmPassword, name, email } = req.body;
     const userNameCheck = await UserModel.findOne({ name });
     if (userNameCheck) throw new Error("Username already used");
@@ -35,7 +35,7 @@ export async function register(req, res) {
     const cookie = { userId: user._id };
     const secret = process.env.SECRET;
     user.password = undefined;
-    
+
     if (!secret) throw new Error("couldn't find secret from .env");
     const JWTCookie = jwt.encode(cookie, secret);
     if (user) {

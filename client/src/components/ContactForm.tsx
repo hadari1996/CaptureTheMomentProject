@@ -16,14 +16,12 @@ function ContactForm() {
     e.preventDefault();
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID!, e.target, PUBLIC_KEY).then(
       (result: { text: string }) => {
-        console.log(result.text);
         Swal.fire({
           icon: "success",
           title: "Message Sent Successfully",
         });
       },
       (error: { text: string }) => {
-        console.log(error.text);
         Swal.fire({
           icon: "error",
           title: "Ooops, something went wrong",

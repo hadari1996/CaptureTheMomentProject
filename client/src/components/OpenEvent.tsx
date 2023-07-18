@@ -15,7 +15,6 @@ export const OpenEvent = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const getAllOpenDates = async () => {
-    console.log("openEvents")
     const { data } = await axios.get(`/api/v1/events/open-dates`);
     setIsLoading(false);
     const { openDatesEvent, status } = data;

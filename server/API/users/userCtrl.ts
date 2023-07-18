@@ -8,18 +8,20 @@ export async function register(req, res) {
   try {
     
     const { password, confirmPassword, name, email } = req.body;
-    console.log(password, confirmPassword, name, email);
     const userNameCheck = await UserModel.findOne({ name });
     if (userNameCheck) throw new Error("Username already used");
     const emailCheck = await UserModel.findOne({ email });
+
     if (emailCheck) {
       throw new Error("Email already used");
     }
+
     const { error } = UserValidation.validate({
       email,
       password,
       confirmPassword,
     });
+
     if (error) throw error;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(password, salt);
@@ -29,9 +31,11 @@ export async function register(req, res) {
       password: hash,
       role: 0,
     });
+
     const cookie = { userId: user._id };
     const secret = process.env.SECRET;
     user.password = undefined;
+    
     if (!secret) throw new Error("couldn't find secret from .env");
     const JWTCookie = jwt.encode(cookie, secret);
     if (user) {

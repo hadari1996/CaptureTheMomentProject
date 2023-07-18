@@ -1,0 +1,53 @@
+.container-add-event {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  //   margin-left: 20rem;
+
+  .wrapper-add-event {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    border-radius: 1rem;
+    padding: 2rem 10rem;
+    position: absolute;
+    top: 10rem;
+    .add-event-date-input {
+      background-color: transparent;
+      padding: 0.7rem;
+      border: 0.1rem solid rgb(239, 157, 157);
+      border-radius: 0.4rem;
+      font-size: 1rem;
+    }
+    .add_icon {
+      width: 5rem;
+      height: 2.9rem;
+      border: 0.1rem solid rgb(239, 157, 157);
+      border-radius: 0.4rem;
+    }
+  }
+
+  h1 {
+    color: rgb(133, 1, 35);
+  }
+}
+
+.add-event-date-input {
+  background-color: transparent;
+  padding: 0.7rem;
+  border: 0.1rem solid black;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+}
+.add_icon {
+  width: 5rem;
+  height: 2.9rem;
+  border: 0.1rem solid black;
+  border-radius: 0.4rem;
+}
+
+h1 {
+  color: black;
+}

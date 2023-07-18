@@ -6,7 +6,6 @@ const saltRounds = 10;
 
 export async function register(req, res) {
   try {
-    console.log("test")
     const { password, confirmPassword, name, email } = req.body;
     const userNameCheck = await UserModel.findOne({ name });
     if (userNameCheck) throw new Error("Username already used");

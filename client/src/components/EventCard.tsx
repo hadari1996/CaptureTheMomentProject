@@ -27,14 +27,12 @@ interface EventCardProps {
   eventDate: Event;
   openEvents?: Event[];
   setOpenEvents?: CallableFunction;
-  getDates?: CallableFunction;
 }
 
 const EventCard: FC<EventCardProps> = ({
   eventDate,
   openEvents,
   setOpenEvents,
-  getDates,
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -109,7 +107,7 @@ const EventCard: FC<EventCardProps> = ({
 
       const { status } = data;
       setStatus(Status.APPROVED);
-      
+
       if (openEvents && setOpenEvents) {
         filterEventList(status, openEvents, eventDate, setOpenEvents);
       }

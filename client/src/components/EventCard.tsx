@@ -27,14 +27,14 @@ interface EventCardProps {
   eventDate: Event;
   openEvents?: Event[];
   setOpenEvents?: CallableFunction;
-  getDates?: CallableFunction
+  getDates?: CallableFunction;
 }
 
 const EventCard: FC<EventCardProps> = ({
   eventDate,
   openEvents,
   setOpenEvents,
-  getDates
+  getDates,
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -61,10 +61,6 @@ const EventCard: FC<EventCardProps> = ({
     );
     setPackageInformation(result[0]);
   }, [packageSelect]);
-
-  useEffect(() => {
-    dispatch(getUserByCookie());
-  }, []);
 
   const filterEventList = (
     status: boolean,
@@ -112,12 +108,11 @@ const EventCard: FC<EventCardProps> = ({
       );
 
       const { status } = data;
-      if (status && getDates) {
-        getDates()
+      setStatus(Status.APPROVED);
+      
+      if (openEvents && setOpenEvents) {
+        filterEventList(status, openEvents, eventDate, setOpenEvents);
       }
-      // if (openEvents && setOpenEvents) {
-      //   filterEventList(status, openEvents, eventDate, setOpenEvents);
-      // }
     } catch (error: any) {
       console.error(error.message);
     }

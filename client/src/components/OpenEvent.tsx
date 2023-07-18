@@ -62,7 +62,6 @@ export const OpenEvent = () => {
                   eventDate={ev}
                   openEvents={openEvents}
                   setOpenEvents={setOpenEvents}
-                  getDates={getAllOpenDates}
                 />
               );
             })}

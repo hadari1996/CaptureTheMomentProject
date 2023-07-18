@@ -54,7 +54,6 @@ export const AdminMenu = () => {
               <ListItem disablePadding>
                 <ListItemButton
                   onClick={() => handleClick("add event")}
-                  // sx={{backgroundColor: "ButtonHighlight"}}
                   selected={isFilled}
                 >
                   <span>Add Events</span>

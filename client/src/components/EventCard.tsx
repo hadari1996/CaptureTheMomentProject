@@ -159,7 +159,7 @@ const EventCard: FC<EventCardProps> = ({
             </Box>
 
             <h5>{JSON.stringify(eventDate.date).substr(1, 10)}</h5>
-            <h5>{status}</h5>
+            <h5>{eventDate.status}</h5>
             {status === "open" ? null : <h5>{eventDate.email}</h5>}
             {status === "pending" ? (
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -182,7 +182,7 @@ const EventCard: FC<EventCardProps> = ({
               </Box>
             ) : null}
 
-            {status === "open" ? (
+            {eventDate.status === "open" ? (
               <Box>
                 <IconButton
                   aria-label="delete"
